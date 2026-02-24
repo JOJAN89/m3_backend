@@ -3,9 +3,19 @@ import eventRoutes from "./api/v1/routes/event.routes";
 
 const app = express();
 
-// 🔥 THIS LINE IS MANDATORY
+// Middleware
 app.use(express.json());
 
+// Health route
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "OK",
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+  });
+});
+
+// Event routes
 app.use("/api/v1", eventRoutes);
 
 export default app;
