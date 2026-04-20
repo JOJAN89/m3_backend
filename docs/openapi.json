@@ -1,0 +1,218 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Events API",
+    "version": "1.0.0",
+    "description": "API documentation for the Events API with Joi validation, Helmet, CORS, and dotenv."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local development server"
+    }
+  ],
+  "paths": {
+    "/api/v1/events": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Get all events",
+        "description": "Returns all events.",
+        "responses": {
+          "200": {
+            "description": "Events retrieved successfully"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Create event",
+        "description": "Creates a new event.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "title": "Hackathon",
+                "date": "2026-07-20",
+                "location": "Winnipeg",
+                "description": "Student coding event"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Event created successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          }
+        }
+      }
+    },
+    "/api/v1/events/{id}": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Get event by ID",
+        "description": "Returns one event by ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event retrieved successfully"
+          },
+          "404": {
+            "description": "Event not found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Update event",
+        "description": "Updates an existing event.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "example": {
+                "title": "Updated Event",
+                "location": "Brandon"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Event updated successfully"
+          },
+          "400": {
+            "description": "Validation error"
+          },
+          "404": {
+            "description": "Event not found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Delete event",
+        "description": "Deletes an event by ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event deleted successfully"
+          },
+          "404": {
+            "description": "Event not found"
+          }
+        }
+      }
+    },
+    "/api/v1/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "summary": "Health check",
+        "description": "Checks if the API is running.",
+        "responses": {
+          "200": {
+            "description": "API is running"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateEventRequest": {
+        "type": "object",
+        "required": [
+          "title",
+          "date",
+          "location"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Hackathon"
+          },
+          "date": {
+            "type": "string",
+            "example": "2026-07-20"
+          },
+          "location": {
+            "type": "string",
+            "example": "Winnipeg"
+          },
+          "description": {
+            "type": "string",
+            "example": "Student coding event"
+          }
+        }
+      },
+      "UpdateEventRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Updated Hackathon"
+          },
+          "date": {
+            "type": "string",
+            "example": "2026-08-10"
+          },
+          "location": {
+            "type": "string",
+            "example": "Brandon"
+          },
+          "description": {
+            "type": "string",
+            "example": "Updated event details"
+          }
+        }
+      }
+    }
+  },
+  "tags": []
+}

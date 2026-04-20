@@ -1,15 +1,14 @@
 {
   "name": "m3_backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
+  "description": "Events API with validation, security, and Swagger documentation",
+  "main": "dist/server.js",
   "scripts": {
     "dev": "npx ts-node src/server.ts",
     "build": "tsc",
-    "test": "jest"
+    "start": "node dist/server.js",
+    "test": "jest",
+    "generate:openapi": "npx ts-node src/config/swagger.ts"
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import swaggerJSDoc from "swagger-jsdoc";
 import { env } from "./env";
 
@@ -24,3 +26,19 @@ const options: swaggerJSDoc.Options = {
 };
 
 export const swaggerSpec = swaggerJSDoc(options);
+
+if (require.main === module) {
+  const docsDir = path.join(process.cwd(), "docs");
+
+  if (!fs.existsSync(docsDir)) {
+    fs.mkdirSync(docsDir, { recursive: true });
+  }
+
+  fs.writeFileSync(
+    path.join(docsDir, "openapi.json"),
+    JSON.stringify(swaggerSpec, null, 2),
+    "utf-8"
+  );
+
+  console.log("OpenAPI spec generated at docs/openapi.json");
+}
