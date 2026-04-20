@@ -24,3 +24,9 @@ import helmet from "helmet";
 import { helmetOptions } from "./config/helmetOptions";
 
 app.use(helmet(helmetOptions));
+
+import cors from "cors";
+import { corsOptions } from "./config/corsOptions";
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
