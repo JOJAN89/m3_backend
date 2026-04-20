@@ -12,12 +12,12 @@ export const createEventSchema = Joi.object({
 
   capacity: Joi.number()
     .integer()
-    .min(5)
+    .min(6)
     .required(),
 
   registrationCount: Joi.number()
     .integer()
-    .min(0)
+    .min(6)
     .max(Joi.ref("capacity"))
     .default(0),
 
