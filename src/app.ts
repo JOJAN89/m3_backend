@@ -30,3 +30,8 @@ import { corsOptions } from "./config/corsOptions";
 
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
+
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "./config/swagger";
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
