@@ -19,3 +19,8 @@ app.get("/health", (req, res) => {
 app.use("/api/v1", eventRoutes);
 
 export default app;
+
+import helmet from "helmet";
+import { helmetOptions } from "./config/helmetOptions";
+
+app.use(helmet(helmetOptions));
